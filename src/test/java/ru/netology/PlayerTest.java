@@ -67,6 +67,7 @@ public class PlayerTest {
         assertEquals(expected, actual);
     }
 
+
     @Test
     public void shouldReturnMostPlayedByGenreIfNoGames() {
         GameStore store = new GameStore();
