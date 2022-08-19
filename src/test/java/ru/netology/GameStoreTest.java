@@ -34,7 +34,7 @@ public class GameStoreTest {
     @Test
     public void playingTheSameTimeTest() {
         GameStore store = new GameStore();
-        store.addPlayTime("player1", 1);
+        store.addPlayTime("player1", 0);
         store.addPlayTime("player2", 1);
 
         String expected = null;
