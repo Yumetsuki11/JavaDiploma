@@ -7,18 +7,6 @@ import org.junit.jupiter.api.Test;
 
 public class PlayerTest {
 
-    /*@Test
-    public void shouldInstallNewGame() {
-        GameStore store = new GameStore();
-        Game game = store.publishGame("Amogus 2", "Симулятор выживания");
-
-        Player player = new Player("Igoryok");
-        player.installGame(game);
-
-        int expected = 0;
-        Assertions.assertEquals(expected, 0);
-    }*/
-
     @Test
     public void shouldSumGenreIfNoGames() {
         GameStore store = new GameStore();
@@ -119,6 +107,32 @@ public class PlayerTest {
     }
 
     @Test
+    public void shouldInstallNewGame() {
+        GameStore store = new GameStore();
+        Game game1 = store.publishGame("Minecraft", "Песочницы");
+
+        Player player = new Player("ilovebegulalol");
+        player.installGame(game1);
+
+        int actual = player.play(game1, 0);
+        assertEquals(0, actual);
+    }
+
+    @Test
+    public void shouldNotReinstallExistingGame() {
+        GameStore store = new GameStore();
+        Game game1 = store.publishGame("Minecraft", "Песочницы");
+
+        Player player = new Player("ilovebegulalol");
+        player.installGame(game1);
+        player.play(game1, 1);
+        player.installGame(game1);
+
+        int actual = player.play(game1, 1);
+        assertEquals(2, actual);
+    }
+
+    @Test
     public void shouldReturnPlayedTimeIfNewGame() {
         GameStore store = new GameStore();
         Game game1 = store.publishGame("Minecraft", "Песочницы");
@@ -156,3 +170,4 @@ public class PlayerTest {
         });
     }
 }
+
