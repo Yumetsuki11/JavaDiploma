@@ -34,10 +34,9 @@ public class GameStoreTest {
     @Test
     public void playingTheSameTimeTest() {
         GameStore store = new GameStore();
-        store.addPlayTime("player1", 0);
-        store.addPlayTime("player2", 1);
+        store.addPlayTime("player1", 1);
 
-        String expected = null;
+        String expected = "player1";
         String actual = store.getMostPlayer();
 
         assertEquals(expected, actual);
@@ -70,6 +69,16 @@ public class GameStoreTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void noPlayersTest() {
+        GameStore store = new GameStore();
+        Game game = store.publishGame("Нетология Баттл Онлайн", "Аркады");
+
+        String expected = null;
+        String actual = store.getMostPlayer();
+
+        assertEquals(expected, actual);
+    }
 
     // другие ваши тесты
 }
