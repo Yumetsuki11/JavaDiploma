@@ -63,9 +63,10 @@ public class PlayerTest {
         player.play(game3, 1);
 
         int expected = 1757;
-        int actual = player.sumGenre(game1.getGenre());
+        int actual = player.sumGenre("Симуляторы выживания");
         assertEquals(expected, actual);
     }
+
 
     @Test
     public void shouldReturnMostPlayedByGenreIfNoGames() {
