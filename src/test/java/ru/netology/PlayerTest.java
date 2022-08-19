@@ -116,4 +116,42 @@ public class PlayerTest {
         Game actual = player.mostPlayerByGenre("Визуальные новеллы");
         assertEquals(game2, actual);
     }
+
+    @Test
+    public void shouldReturnPlayedTimeIfNewGame() {
+        GameStore store = new GameStore();
+        Game game1 = store.publishGame("Minecraft", "Песочницы");
+
+        Player player = new Player("ilovebegulalol");
+        player.installGame(game1);
+
+        int actual = player.play(game1, 10000);
+        assertEquals(10000, actual);
+    }
+
+    @Test
+    public void shouldReturnPlayedTimeIfAlreadyPlayed() {
+        GameStore store = new GameStore();
+        Game game1 = store.publishGame("Minecraft", "Песочницы");
+
+        Player player = new Player("ilovebegulalol");
+        player.installGame(game1);
+        player.play(game1, 2);
+
+        int actual = player.play(game1, 10000);
+        assertEquals(10002, actual);
+    }
+
+    @Test
+    public void shouldThrowExceptionWhenPlayingGameNotInstalled() {
+        GameStore store = new GameStore();
+        Game game1 = store.publishGame("Minecraft", "Песочницы");
+
+        Player player = new Player("ilovebegulalol");
+
+        assertThrows(RuntimeException.class, () ->
+        {
+            player.play(game1, 10000);
+        });
+    }
 }
