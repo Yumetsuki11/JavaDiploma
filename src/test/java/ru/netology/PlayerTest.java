@@ -6,32 +6,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class PlayerTest {
-
-    /*@Test
-    public void shouldInstallNewGame() {
-        GameStore store = new GameStore();
-        Game game = store.publishGame("Amogus 2", "Симулятор выживания");
-
-        Player player = new Player("Igoryok");
-        player.installGame(game);
-
-        int expected = 0;
-        Assertions.assertEquals(expected, 0);
-    }*/
-
-    @Test
-    public void shouldSumGenreIfNoGames() {
-        GameStore store = new GameStore();
-        Game game = store.publishGame("Нетология Баттл Онлайн", "Аркады");
-
-        Player player = new Player("Petya");
-        player.installGame(game);
-        player.play(game, 3);
-
-        int expected = 0;
-        int actual = player.sumGenre("Приключения");
-        assertEquals(expected, actual);
-    }
+    
 
     @Test
     public void shouldSumGenreIfNoGames() {
