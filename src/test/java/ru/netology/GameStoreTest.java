@@ -15,6 +15,18 @@ public class GameStoreTest {
         assertTrue(store.containsGame(game));
     }
 
+    @Test
+    public void shouldAddGame1() {
+
+        GameStore store = new GameStore();
+        Game game = null;
+
+        boolean actual = store.containsGame(game);
+        boolean expected = false;
+        assertEquals(expected, actual);
+
+    }
+
 
     @Test
     public void playerWhoPlayedMoreTest() {
@@ -80,5 +92,5 @@ public class GameStoreTest {
         assertEquals(expected, actual);
     }
 
-    // другие ваши тесты
+
 }
