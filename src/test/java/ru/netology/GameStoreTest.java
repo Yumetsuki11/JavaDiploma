@@ -16,7 +16,7 @@ public class GameStoreTest {
     }
 
     @Test
-    public void shouldAddGame1() {
+    public void thereIsNoGame() {
 
         GameStore store = new GameStore();
         Game game = null;
@@ -92,5 +92,17 @@ public class GameStoreTest {
         assertEquals(expected, actual);
     }
 
+    @Test
+    public void fewPlayersPlayedTheMost() {
+        GameStore store = new GameStore();
+        store.addPlayTime("player1", 10);
+        store.addPlayTime("player2", 10);
 
+        String expected = "player1";
+        String actual = store.getMostPlayer();
+
+        assertEquals(expected, actual);
+
+
+    }
 }
