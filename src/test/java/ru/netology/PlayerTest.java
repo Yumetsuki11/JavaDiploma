@@ -34,6 +34,20 @@ public class PlayerTest {
     }
 
     @Test
+    public void shouldSumGenreIfNoGames() {
+        GameStore store = new GameStore();
+        Game game = store.publishGame("Нетология Баттл Онлайн", "Аркады");
+
+        Player player = new Player("Petya");
+        player.installGame(game);
+        player.play(game, 3);
+
+        int expected = 0;
+        int actual = player.sumGenre("Приключения");
+        assertEquals(expected, actual);
+    }
+
+    @Test
     public void shouldSumGenreIfOneGame() {
         GameStore store = new GameStore();
         Game game = store.publishGame("Нетология Баттл Онлайн", "Аркады");
@@ -116,4 +130,69 @@ public class PlayerTest {
         Game actual = player.mostPlayerByGenre("Визуальные новеллы");
         assertEquals(game2, actual);
     }
+
+    @Test
+    public void shouldInstallNewGame() {
+        GameStore store = new GameStore();
+        Game game1 = store.publishGame("Minecraft", "Песочницы");
+
+        Player player = new Player("ilovebegulalol");
+        player.installGame(game1);
+
+        int actual = player.play(game1, 0);
+        assertEquals(0, actual);
+    }
+
+    @Test
+    public void shouldNotReinstallExistingGame() {
+        GameStore store = new GameStore();
+        Game game1 = store.publishGame("Minecraft", "Песочницы");
+
+        Player player = new Player("ilovebegulalol");
+        player.installGame(game1);
+        player.play(game1, 1);
+        player.installGame(game1);
+
+        int actual = player.play(game1, 1);
+        assertEquals(2, actual);
+    }
+
+    @Test
+    public void shouldReturnPlayedTimeIfNewGame() {
+        GameStore store = new GameStore();
+        Game game1 = store.publishGame("Minecraft", "Песочницы");
+
+        Player player = new Player("ilovebegulalol");
+        player.installGame(game1);
+
+        int actual = player.play(game1, 10000);
+        assertEquals(10000, actual);
+    }
+
+    @Test
+    public void shouldReturnPlayedTimeIfAlreadyPlayed() {
+        GameStore store = new GameStore();
+        Game game1 = store.publishGame("Minecraft", "Песочницы");
+
+        Player player = new Player("ilovebegulalol");
+        player.installGame(game1);
+        player.play(game1, 2);
+
+        int actual = player.play(game1, 10000);
+        assertEquals(10002, actual);
+    }
+
+    @Test
+    public void shouldThrowExceptionWhenPlayingGameNotInstalled() {
+        GameStore store = new GameStore();
+        Game game1 = store.publishGame("Minecraft", "Песочницы");
+
+        Player player = new Player("ilovebegulalol");
+
+        assertThrows(RuntimeException.class, () ->
+        {
+            player.play(game1, 10000);
+        });
+    }
 }
+
